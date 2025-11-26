@@ -24,10 +24,12 @@
     "baseUrl": "./src",
     "paths": {
       "@/*": ["*"],
+      "@constants": ["constants/index.ts"],
       "@pages": ["pages/index.ts"],
       "@components": ["components/index.ts"],
       "@schemas": ["models/schemas/index.ts"],
       "@ts-enums": ["models/enums/index.ts"],
+      "@ts-interfaces": ["models/interfaces/index.ts"],
       "@ts-types": ["models/types/index.ts"]
     }
   },
