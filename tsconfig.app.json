@@ -23,7 +23,12 @@
     "noUncheckedSideEffectImports": true,
     "baseUrl": "./src",
     "paths": {
-      "@/*": ["*"]
+      "@/*": ["*"],
+      "@pages": ["pages/index.ts"],
+      "@components": ["components/index.ts"],
+      "@schemas": ["models/schemas/index.ts"],
+      "@ts-enums": ["models/enums/index.ts"],
+      "@ts-types": ["models/types/index.ts"]
     }
   },
   "include": ["src"]
