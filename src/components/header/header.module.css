@@ -1,7 +1,11 @@
 .header {
   display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
   align-items: center;
   justify-content: space-between;
+
+  padding-block: 47px;
 }
 
 .logo {
@@ -10,8 +14,39 @@
   align-items: center;
 }
 
+.search {
+  position: relative;
+
+  min-width: 280px;
+  height: 40px;
+  padding: 10px 46px 10px 15px;
+  border: 1px solid #e6eaf5;
+  border-radius: 5px;
+
+  font-family: inherit;
+  font-size: 14px;
+  color: #929bbc;
+
+  background-color: #fcfcff;
+  background-image: url('../../assets/icons/Search.svg');
+  background-repeat: no-repeat;
+  background-position: right 15px center;
+
+  &:focus {
+    color: inherit;
+    background-image: url('../../assets/icons/Search-Active.svg');
+  }
+
+  @media screen and (width <= 600px) {
+    flex-basis: 100%;
+    order: 2;
+    margin-inline: auto;
+  }
+}
+
 .user {
   display: flex;
   gap: 0.5rem;
   align-items: center;
+  font-size: 14px;
 }
