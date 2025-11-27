@@ -34,7 +34,7 @@ p {
     display: flex;
     flex-direction: column;
     flex-grow: 1;
-    gap: 1rem;
+    gap: 55px;
     align-items: center;
     justify-content: center;
   }
