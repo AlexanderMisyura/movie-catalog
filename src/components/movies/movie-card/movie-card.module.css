@@ -1,7 +1,7 @@
 .card {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 23px;
   width: 100%;
 }
 
@@ -10,6 +10,8 @@
   height: 270px;
   border: 1px solid #3256e3;
   border-radius: 10px;
+
+  object-fit: cover;
 }
 
 .info {
