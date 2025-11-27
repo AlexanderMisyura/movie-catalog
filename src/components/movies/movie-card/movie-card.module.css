@@ -1,7 +1,10 @@
 .card {
+  cursor: pointer;
+
   display: flex;
   flex-direction: column;
   gap: 23px;
+
   width: 100%;
 }
 
@@ -17,6 +20,6 @@
 .info {
   display: flex;
   flex-direction: column;
-  padding-inline: 1rem;
+  padding-inline: 13px;
   line-height: 140%;
 }

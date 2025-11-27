@@ -1,5 +1,7 @@
 import { MovieGrid } from '@/components';
 
+import styles from './catalog.module.css';
+
 export const Catalog = () => {
   const searchTerm = 'Batman';
 
@@ -70,12 +72,20 @@ export const Catalog = () => {
     },
   ];
 
+  const tempResultsNumber = 338;
+
   return (
     <>
       <title>Movie Catalog</title>
 
-      <div style={{ alignSelf: 'flex-start' }}>
-        You searched for: {searchTerm} <span>338 results</span>
+      <div className={styles.searchLine}>
+        <div className={styles.searchTitle}>
+          You searched for:{' '}
+          <span className={styles.searchTerm}>{searchTerm}</span>{' '}
+        </div>
+        <span
+          className={styles.searchNumber}
+        >{`${tempResultsNumber} results`}</span>
       </div>
 
       <MovieGrid movies={tempMovies} />
