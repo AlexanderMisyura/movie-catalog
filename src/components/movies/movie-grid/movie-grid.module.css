@@ -6,3 +6,13 @@
   width: 100%;
   max-width: 1145px;
 }
+
+.message {
+  display: flex;
+  flex-grow: 1;
+  align-items: center;
+
+  font-size: 1.5rem;
+  text-align: center;
+  text-wrap: balance;
+}
