@@ -1,0 +1,29 @@
+.searchLine {
+  display: flex;
+  gap: 17px;
+  align-items: center;
+  align-self: flex-start;
+}
+
+.searchTitle {
+  font-size: 22px;
+  line-height: 140%;
+}
+
+.searchTerm {
+  text-decoration: underline;
+  text-decoration-skip-ink: none;
+}
+
+.searchNumber {
+  padding: 5px 15px;
+  border-radius: 5px;
+
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 140%;
+  color: #fcfcff;
+  white-space: nowrap;
+
+  background-color: #3256e3;
+}
