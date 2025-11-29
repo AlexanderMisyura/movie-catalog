@@ -1,9 +1,15 @@
+import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router';
 
 import { getMovies } from '@/api/movies';
 
 export function useMoviesPromise() {
-  const [params] = useSearchParams();
+  const [searchParams] = useSearchParams();
+  const [stateParams, setStateParams] = useState<URLSearchParams>(searchParams);
 
-  return getMovies(params);
+  useEffect(() => {
+    setStateParams(searchParams);
+  }, [searchParams]);
+
+  return getMovies(stateParams);
 }
