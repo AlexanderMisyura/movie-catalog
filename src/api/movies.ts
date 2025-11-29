@@ -2,7 +2,8 @@ import { MovieErrorResponseSchema, MovieResponseSchema } from '@schemas';
 import { API_CONFIG } from 'api.config';
 
 export async function getMovies(searchParams: URLSearchParams) {
-  const searchTerm = searchParams.get('s');
+  const searchTerm = searchParams.get('s')?.trim();
+  const page = searchParams.get('page')?.trim() ?? '1';
 
   if (!searchTerm) {
     return {
@@ -12,11 +13,14 @@ export async function getMovies(searchParams: URLSearchParams) {
     };
   }
 
-  const params = new URLSearchParams(searchParams);
-  params.set('apikey', API_CONFIG.API_KEY);
+  const requestParams = new URLSearchParams({
+    s: searchTerm,
+    page: page,
+    apikey: API_CONFIG.API_KEY,
+  });
 
   const url = new URL(API_CONFIG.BASE_URL);
-  url.search = params.toString();
+  url.search = requestParams.toString();
 
   try {
     const response = await fetch(url);
@@ -45,7 +49,7 @@ export async function getMovies(searchParams: URLSearchParams) {
 
     const parsedError = MovieErrorResponseSchema.safeParse(data);
     if (parsedError.success) {
-      return { movies: [], totalResults: '0', searchTerm };
+      return parsedError.data;
     }
 
     throw new Error('An error occurred with data format');
