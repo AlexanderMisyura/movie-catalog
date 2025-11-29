@@ -1,1 +1,6 @@
-export type { Movie, MoviesResponse } from './movie';
+export type {
+  Movie,
+  MoviesData,
+  MoviesErrorResponse,
+  MoviesResponse,
+} from './movie';

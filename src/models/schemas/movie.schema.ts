@@ -7,3 +7,9 @@ export const MovieSchema = z.object({
   Type: z.string(),
   Poster: z.string(),
 });
+
+export const MoviesDataSchema = z.object({
+  movies: z.array(MovieSchema),
+  totalResults: z.string(),
+  searchTerm: z.string(),
+});
