@@ -1,15 +1,20 @@
 import { MovieErrorResponseSchema, MovieResponseSchema } from '@schemas';
+import type { MoviesData, MoviesErrorResponse } from '@ts-types';
 import { API_CONFIG } from 'api.config';
 
-export async function getMovies(searchParams: URLSearchParams) {
+export async function getMovies(
+  searchParams: URLSearchParams
+): Promise<MoviesData | MoviesErrorResponse> {
   const searchTerm = searchParams.get('s')?.trim();
-  const page = searchParams.get('page')?.trim() ?? '1';
+  const rawPageParam = searchParams.get('page')?.trim();
+  const page = rawPageParam && rawPageParam !== '' ? rawPageParam : '1';
 
   if (!searchTerm) {
     return {
       movies: [],
-      totalResults: '0',
+      totalResults: 0,
       searchTerm: '',
+      currentPage: 1,
     };
   }
 
@@ -42,8 +47,9 @@ export async function getMovies(searchParams: URLSearchParams) {
     if (parsedData.success) {
       return {
         movies: parsedData.data.Search,
-        totalResults: parsedData.data.totalResults,
+        totalResults: Number(parsedData.data.totalResults),
         searchTerm,
+        currentPage: Number(page),
       };
     }
 
