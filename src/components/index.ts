@@ -4,4 +4,7 @@ export { ImageLoader } from './image-loader/image-loader';
 export { MovieCard } from './movies/movie-card/movie-card';
 export { MovieGrid } from './movies/movie-grid/movie-grid';
 export { SearchTitle } from './movies/search-title/search-title';
+export { PaginationBlock } from './pagination/pagination-block/pagination-block';
+export { PaginationEdges } from './pagination/pagination-edges/pagination-edges';
+export { PaginationItem } from './pagination/pagination-item/pagination-item';
 export { Spinner } from './spinner/spinner';

@@ -1,0 +1,10 @@
+.paginationBlock {
+  display: flex;
+  border: 1px solid #e6eaf5;
+  border-radius: 5px;
+  background: #fcfcff;
+
+  & > *:not(:last-child) {
+    border-right: 1px solid #e6eaf5;
+  }
+}
