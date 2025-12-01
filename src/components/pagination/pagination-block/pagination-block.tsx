@@ -3,6 +3,8 @@ import { MoviesDataSchema } from '@schemas';
 import type { MoviesData, MoviesErrorResponse } from '@ts-types';
 import { use } from 'react';
 
+import { createPages } from '@/utils/createPages';
+
 import styles from './pagination-block.module.css';
 
 export const PaginationBlock: React.FC<{
@@ -16,9 +18,9 @@ export const PaginationBlock: React.FC<{
     return null;
   }
 
-  const { currentPage, searchTerm } = moviesDataParsed.data;
+  const { currentPage, totalResults, searchTerm } = moviesDataParsed.data;
 
-  const pages: (number | '...')[] = [1, 2, 3, '...', 50];
+  const pages: (number | '...')[] = createPages(currentPage, totalResults);
 
   if (!searchTerm || pages.length < 2) {
     return null;
