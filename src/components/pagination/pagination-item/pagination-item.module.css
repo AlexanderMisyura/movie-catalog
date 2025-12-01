@@ -1,0 +1,13 @@
+.paginationItem {
+  height: 27px;
+  padding: 5px 12px;
+
+  font-size: 12px;
+  line-height: 140%;
+  color: #010515;
+  text-decoration: none;
+}
+
+.active {
+  background: #f3f5f9;
+}

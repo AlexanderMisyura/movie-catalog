@@ -10,6 +10,7 @@ export const MovieSchema = z.object({
 
 export const MoviesDataSchema = z.object({
   movies: z.array(MovieSchema),
-  totalResults: z.string(),
+  totalResults: z.number(),
   searchTerm: z.string(),
+  currentPage: z.number(),
 });
