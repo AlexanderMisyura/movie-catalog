@@ -32,8 +32,11 @@ export const MovieGrid: React.FC<MoviesPromiseProps> = ({ moviesPromise }) => {
 
   return (
     <div className={styles.grid}>
-      {movies.map((movie) => (
-        <MovieCard key={movie.imdbID} {...movie} />
+      {movies.map((movie, index) => (
+        <MovieCard
+          key={`${movie.imdbID}${movies[index - 1]?.imdbID ?? ''}`}
+          {...movie}
+        />
       ))}
     </div>
   );
