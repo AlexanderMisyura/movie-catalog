@@ -1,13 +1,11 @@
 import { MovieCard } from '@components';
 import { MovieErrorResponseSchema, MoviesDataSchema } from '@schemas';
-import type { MoviesData, MoviesErrorResponse } from '@ts-types';
+import type { MoviesPromiseProps } from '@ts-interfaces';
 import { use } from 'react';
 
 import styles from './movie-grid.module.css';
 
-export const MovieGrid: React.FC<{
-  moviesPromise: Promise<MoviesData | MoviesErrorResponse>;
-}> = ({ moviesPromise }) => {
+export const MovieGrid: React.FC<MoviesPromiseProps> = ({ moviesPromise }) => {
   const resolved = use(moviesPromise);
 
   const errorParsed = MovieErrorResponseSchema.safeParse(resolved);
@@ -34,8 +32,11 @@ export const MovieGrid: React.FC<{
 
   return (
     <div className={styles.grid}>
-      {movies.map((movie) => (
-        <MovieCard key={movie.imdbID} {...movie} />
+      {movies.map((movie, index) => (
+        <MovieCard
+          key={`${movie.imdbID}${movies[index - 1]?.imdbID ?? ''}`}
+          {...movie}
+        />
       ))}
     </div>
   );

@@ -3,19 +3,21 @@ import type { Movie } from '@ts-types';
 
 import styles from './movie-card.module.css';
 
-export const MovieCard: React.FC<Movie> = (movie) => {
+export const MovieCard: React.FC<Movie> = ({
+  Poster,
+  Title,
+  Year,
+  imdbID,
+  Type,
+}) => {
   return (
     <figure className={styles.card}>
-      <ImageLoader
-        className={styles.poster}
-        src={movie.Poster}
-        alt={movie.Title}
-      />
+      <ImageLoader className={styles.poster} src={Poster} alt={Title} />
       <div className={styles.info}>
-        <figcaption>Name: {movie.Title}</figcaption>
-        <p>Year: {movie.Year}</p>
-        <p>imdbID: {movie.imdbID}</p>
-        <p>Type: {movie.Type}</p>
+        <figcaption>Name: {Title}</figcaption>
+        <p>Year: {Year}</p>
+        <p>imdbID: {imdbID}</p>
+        <p>Type: {Type}</p>
       </div>
     </figure>
   );

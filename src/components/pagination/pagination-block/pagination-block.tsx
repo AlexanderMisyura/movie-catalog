@@ -1,15 +1,15 @@
 import { PaginationEdges, PaginationItem } from '@components';
 import { MoviesDataSchema } from '@schemas';
-import type { MoviesData, MoviesErrorResponse } from '@ts-types';
+import type { MoviesPromiseProps } from '@ts-interfaces';
 import { use } from 'react';
 
 import { createPages } from '@/utils/createPages';
 
 import styles from './pagination-block.module.css';
 
-export const PaginationBlock: React.FC<{
-  moviesPromise: Promise<MoviesData | MoviesErrorResponse>;
-}> = ({ moviesPromise }) => {
+export const PaginationBlock: React.FC<MoviesPromiseProps> = ({
+  moviesPromise,
+}) => {
   const resolved = use(moviesPromise);
 
   const moviesDataParsed = MoviesDataSchema.safeParse(resolved);

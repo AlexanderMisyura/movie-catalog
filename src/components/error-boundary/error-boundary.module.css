@@ -1,9 +1,33 @@
-.message {
+.error {
   display: flex;
-  flex-grow: 1;
+  flex-direction: column;
+  gap: 1.5rem;
   align-items: center;
+}
 
+.message {
   font-size: 1.5rem;
   text-align: center;
   text-wrap: balance;
+}
+
+.link {
+  cursor: pointer;
+
+  padding: 0.5rem 1rem;
+  border: 1px solid #e6eaf5;
+  border-radius: 5px;
+
+  font-size: 1rem;
+  color: #fff;
+  text-decoration: none;
+
+  background: #3256e3;
+
+  transition: 0.3s ease;
+
+  &:hover {
+    color: #3256e3;
+    background-color: #fff;
+  }
 }

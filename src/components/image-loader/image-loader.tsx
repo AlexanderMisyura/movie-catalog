@@ -17,7 +17,9 @@ export const ImageLoader: React.FC<ImageLoaderProps> = ({
   ...props
 }) => {
   const [imageSrc, setImageSrc] = useState<string>(spinnerIcon);
-  const [styleClassName, setStyleClassName] = useState<string | null>(null);
+  const [styleClassName, setStyleClassName] = useState<string | null>(
+    styles.loader
+  );
 
   useEffect(() => {
     const img = new Image();
@@ -25,6 +27,7 @@ export const ImageLoader: React.FC<ImageLoaderProps> = ({
 
     img.onload = () => {
       setImageSrc(src);
+      setStyleClassName(null);
     };
 
     img.onerror = () => {

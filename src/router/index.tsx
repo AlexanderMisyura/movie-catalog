@@ -1,4 +1,5 @@
-import { Catalog, NotFound } from '@pages';
+import { ErrorBoundary } from '@components';
+import { Catalog } from '@pages';
 import { UrlPath } from '@ts-enums';
 import { createBrowserRouter, redirect, type RouteObject } from 'react-router';
 
@@ -8,23 +9,17 @@ export const routes: RouteObject[] = [
   {
     Component: RootLayout,
     path: UrlPath.HOME,
+    ErrorBoundary,
+
     children: [
       {
-        children: [
-          {
-            index: true,
-            loader: () => redirect(UrlPath.CATALOG),
-            Component: () => null,
-          },
-          {
-            path: UrlPath.CATALOG,
-            Component: Catalog,
-          },
-          {
-            path: '/*',
-            Component: NotFound,
-          },
-        ],
+        index: true,
+        loader: () => redirect(UrlPath.CATALOG),
+      },
+      {
+        path: UrlPath.CATALOG,
+        Component: Catalog,
+        ErrorBoundary,
       },
     ],
   },

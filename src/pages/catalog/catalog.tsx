@@ -1,10 +1,4 @@
-import {
-  ErrorBoundary,
-  MovieGrid,
-  PaginationBlock,
-  SearchTitle,
-  Spinner,
-} from '@components';
+import { MovieGrid, PaginationBlock, SearchTitle, Spinner } from '@components';
 import { useMoviesPromise } from '@hooks';
 import { Suspense } from 'react';
 
@@ -17,18 +11,16 @@ export const Catalog = () => {
     <>
       <title>Movie Catalog</title>
 
-      <ErrorBoundary>
-        <Suspense fallback={<Spinner />}>
-          <div className={styles.catalogData}>
-            <SearchTitle moviesPromise={moviesPromise} />
-            <MovieGrid moviesPromise={moviesPromise} />
-          </div>
+      <Suspense fallback={<Spinner />}>
+        <div className={styles.catalogData}>
+          <SearchTitle moviesPromise={moviesPromise} />
+          <MovieGrid moviesPromise={moviesPromise} />
+        </div>
 
-          <div className={styles.pagination}>
-            <PaginationBlock moviesPromise={moviesPromise} />
-          </div>
-        </Suspense>
-      </ErrorBoundary>
+        <div className={styles.pagination}>
+          <PaginationBlock moviesPromise={moviesPromise} />
+        </div>
+      </Suspense>
     </>
   );
 };
