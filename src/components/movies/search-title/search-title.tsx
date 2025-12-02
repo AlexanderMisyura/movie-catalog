@@ -1,4 +1,4 @@
-import { MovieErrorResponseSchema, MoviesDataSchema } from '@schemas';
+import { MoviesDataSchema } from '@schemas';
 import type { MoviesPromiseProps } from '@ts-interfaces';
 import { use } from 'react';
 
@@ -8,12 +8,6 @@ export const SearchTitle: React.FC<MoviesPromiseProps> = ({
   moviesPromise,
 }) => {
   const resolved = use(moviesPromise);
-
-  const errorParsed = MovieErrorResponseSchema.safeParse(resolved);
-
-  if (errorParsed.success) {
-    return null;
-  }
 
   const moviesDataParsed = MoviesDataSchema.safeParse(resolved);
 
