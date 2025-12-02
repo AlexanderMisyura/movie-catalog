@@ -1,3 +1,4 @@
-.placeholder {
+.placeholder,
+.loader {
   object-fit: none !important;
 }

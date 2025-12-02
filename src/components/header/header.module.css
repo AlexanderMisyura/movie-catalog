@@ -12,6 +12,11 @@
   display: flex;
   gap: 0.5rem;
   align-items: center;
+  margin-right: 60px;
+
+  @media screen and (width <= 680px) {
+    margin-right: 0;
+  }
 }
 
 .search {
@@ -32,9 +37,15 @@
   background-repeat: no-repeat;
   background-position: right 15px center;
 
+  &:hover,
+  &:active,
+  &:focus {
+    padding-inline-end: 15px;
+    background-image: none;
+  }
+
   &:focus {
     color: inherit;
-    background-image: url('../../assets/icons/Search-Active.svg');
   }
 
   @media screen and (width <= 600px) {
