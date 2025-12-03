@@ -2,6 +2,8 @@ import { MovieErrorResponseSchema, MovieResponseSchema } from '@schemas';
 import type { MoviesData, MoviesErrorResponse } from '@ts-types';
 import { API_CONFIG } from 'api.config';
 
+import { messages } from '@/constants/messages';
+
 export async function getMovies(
   searchParams: URLSearchParams
 ): Promise<MoviesData | MoviesErrorResponse> {
@@ -38,32 +40,32 @@ export async function getMovies(
         throw new Error(parsedError.data.Error);
       }
 
-      throw new Error('An error occurred while fetching movies');
+      throw new Error(messages.moviesAPI.fetchError);
     }
 
     const data: unknown = await response.json();
-    const parsedData = MovieResponseSchema.safeParse(data);
+    const parsedResponse = MovieResponseSchema.safeParse(data);
 
-    if (parsedData.success) {
+    if (parsedResponse.success) {
       return {
-        movies: parsedData.data.Search,
-        totalResults: Number(parsedData.data.totalResults),
+        movies: parsedResponse.data.Search,
+        totalResults: Number(parsedResponse.data.totalResults),
         searchTerm,
         currentPage: Number(page),
       };
     }
 
-    const parsedError = MovieErrorResponseSchema.safeParse(data);
-    if (parsedError.success) {
-      return parsedError.data;
+    const parsedErrorResponse = MovieErrorResponseSchema.safeParse(data);
+    if (parsedErrorResponse.success) {
+      return parsedErrorResponse.data;
     }
 
-    throw new Error('An error occurred with data format');
+    throw new Error(messages.moviesAPI.parseError);
   } catch (error) {
     if (error instanceof Error) {
       throw error;
     }
 
-    throw new Error('An unexpected error occurred');
+    throw new Error(messages.moviesAPI.unexpectedError);
   }
 }
