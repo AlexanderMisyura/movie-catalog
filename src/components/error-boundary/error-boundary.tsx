@@ -17,7 +17,7 @@ export const ErrorBoundary: React.FC = () => {
   }
 
   return (
-    <div className={styles.error}>
+    <div data-testid="error-display" className={styles.error}>
       <p className={styles.message}>{message}</p>
       <Link to={UrlPath.CATALOG} className={styles.link}>
         To Catalog page
