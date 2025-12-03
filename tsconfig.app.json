@@ -32,7 +32,8 @@
       "@ts-enums": ["models/enums/index.ts"],
       "@ts-interfaces": ["models/interfaces/index.ts"],
       "@ts-types": ["models/types/index.ts"]
-    }
+    },
+    "types": ["vitest/globals", "@testing-library/jest-dom"]
   },
   "include": ["src"]
 }
