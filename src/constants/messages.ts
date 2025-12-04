@@ -7,4 +7,7 @@ export const messages = {
   movieGrid: {
     initialMessage: 'To search for a movie, enter the name in the search field',
   },
+  searchTitle: {
+    searchedFor: 'You searched for:',
+  },
 } as const;
