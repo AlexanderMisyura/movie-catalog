@@ -79,5 +79,12 @@ export default defineConfig(
     },
   },
 
+  {
+    files: ['**/*.test.{ts,tsx}'],
+    rules: {
+      '@typescript-eslint/require-await': 'off',
+    },
+  },
+
   eslintPluginPrettierRecommended
 );
