@@ -3,6 +3,7 @@ import { MoviesDataSchema } from '@schemas';
 import type { MoviesPromiseProps } from '@ts-interfaces';
 import { use } from 'react';
 
+import { API_CONFIG } from '@/api.config';
 import { createPages } from '@/utils/create-pages';
 
 import styles from './pagination-block.module.css';
@@ -31,7 +32,7 @@ export const PaginationBlock: React.FC<MoviesPromiseProps> = ({
       <PaginationEdges
         previousPage={currentPage - 1}
         nextPage={currentPage + 1}
-        pages={pages}
+        totalPages={Math.ceil(totalResults / API_CONFIG.ITEMS_PER_PAGE)}
         searchTerm={searchTerm}
       >
         {pages.map((page, index) => {
