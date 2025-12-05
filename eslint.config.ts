@@ -86,5 +86,12 @@ export default defineConfig(
     },
   },
 
+  {
+    files: ['vite.config.ts'],
+    rules: {
+      '@typescript-eslint/triple-slash-reference': 'off',
+    },
+  },
+
   eslintPluginPrettierRecommended
 );
