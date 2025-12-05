@@ -1,5 +1,5 @@
 import { ErrorBoundary } from '@components';
-import { screen, waitFor } from '@testing-library/react';
+import { act, screen, waitFor } from '@testing-library/react';
 import { UrlPath } from '@ts-enums';
 import { RootLayout } from 'root-layout';
 
@@ -14,6 +14,24 @@ describe('RootLayout', () => {
     await waitFor(() => {
       expect(window.location.pathname).toBe(UrlPath.CATALOG);
     });
+  });
+
+  it('should initially display header and spinner on /catalog route', async () => {
+    vi.spyOn(console, 'error').mockImplementation(() => null);
+    renderRouter();
+
+    expect(screen.getByTestId('header')).toBeInTheDocument();
+    expect(screen.getByAltText('spinner')).toBeInTheDocument();
+  });
+
+  it('should render header and catalog page on /catalog route after suspense resolves', async () => {
+    await act(async () => {
+      renderRouter();
+    });
+
+    expect(screen.getByTestId('header')).toBeInTheDocument();
+    expect(await screen.findByTestId('catalog-data')).toBeInTheDocument();
+    expect(await screen.findByTestId('pagination')).toBeInTheDocument();
   });
 
   it('should render error page when a route is not found', () => {

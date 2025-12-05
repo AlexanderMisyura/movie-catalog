@@ -12,12 +12,12 @@ export const Catalog = () => {
       <title>Movie Catalog</title>
 
       <Suspense fallback={<Spinner />}>
-        <div className={styles.catalogData}>
+        <div data-testid="catalog-data" className={styles.catalogData}>
           <SearchTitle moviesPromise={moviesPromise} />
           <MovieGrid moviesPromise={moviesPromise} />
         </div>
 
-        <div className={styles.pagination}>
+        <div data-testid="pagination" className={styles.pagination}>
           <PaginationBlock moviesPromise={moviesPromise} />
         </div>
       </Suspense>
