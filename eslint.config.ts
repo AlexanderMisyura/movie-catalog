@@ -79,5 +79,19 @@ export default defineConfig(
     },
   },
 
+  {
+    files: ['**/*.test.{ts,tsx}'],
+    rules: {
+      '@typescript-eslint/require-await': 'off',
+    },
+  },
+
+  {
+    files: ['vite.config.ts'],
+    rules: {
+      '@typescript-eslint/triple-slash-reference': 'off',
+    },
+  },
+
   eslintPluginPrettierRecommended
 );

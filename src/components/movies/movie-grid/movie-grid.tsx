@@ -1,4 +1,5 @@
 import { MovieCard } from '@components';
+import { messages } from '@constants';
 import { MovieErrorResponseSchema, MoviesDataSchema } from '@schemas';
 import type { MoviesPromiseProps } from '@ts-interfaces';
 import { use } from 'react';
@@ -17,16 +18,18 @@ export const MovieGrid: React.FC<MoviesPromiseProps> = ({ moviesPromise }) => {
   const moviesDataParsed = MoviesDataSchema.safeParse(resolved);
 
   if (!moviesDataParsed.success) {
-    return <p className={styles.message}>{moviesDataParsed.error.message}</p>;
+    return (
+      <p data-testid="data-parse-error" className={styles.message}>
+        {moviesDataParsed.error.message}
+      </p>
+    );
   }
 
   const { movies, searchTerm } = moviesDataParsed.data;
 
   if (!searchTerm) {
     return (
-      <p className={styles.message}>
-        To search for a movie, enter the name in the search field
-      </p>
+      <p className={styles.message}>{messages.movieGrid.initialMessage}</p>
     );
   }
 

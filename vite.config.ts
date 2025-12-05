@@ -1,6 +1,9 @@
+/// <reference types="vitest/config" />
+
 import react from '@vitejs/plugin-react';
 import { defineConfig } from 'vite';
 import tsconfigPaths from 'vite-tsconfig-paths';
+import { coverageConfigDefaults } from 'vitest/config';
 
 export default defineConfig({
   base: '/',
@@ -25,4 +28,19 @@ export default defineConfig({
     }),
     tsconfigPaths(),
   ],
+
+  test: {
+    globals: true,
+    environment: 'jsdom',
+    setupFiles: ['./src/setup-tests.ts'],
+    coverage: {
+      exclude: [
+        'src/mocks/**/*',
+        'src/main.tsx',
+        'commitlint.config.ts',
+        'lint-staged.config.ts',
+        ...coverageConfigDefaults.exclude,
+      ],
+    },
+  },
 });

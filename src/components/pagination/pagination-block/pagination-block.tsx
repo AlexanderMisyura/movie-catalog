@@ -3,7 +3,7 @@ import { MoviesDataSchema } from '@schemas';
 import type { MoviesPromiseProps } from '@ts-interfaces';
 import { use } from 'react';
 
-import { createPages } from '@/utils/createPages';
+import { createPages } from '@/utils/create-pages';
 
 import styles from './pagination-block.module.css';
 
@@ -20,14 +20,14 @@ export const PaginationBlock: React.FC<MoviesPromiseProps> = ({
 
   const { currentPage, totalResults, searchTerm } = moviesDataParsed.data;
 
-  const pages: (number | '...')[] = createPages(currentPage, totalResults);
+  const pages = createPages(currentPage, totalResults);
 
   if (!searchTerm || pages.length < 2) {
     return null;
   }
 
   return (
-    <div className={styles.paginationBlock}>
+    <div data-testid="pagination-block" className={styles.paginationBlock}>
       <PaginationEdges
         previousPage={currentPage - 1}
         nextPage={currentPage + 1}

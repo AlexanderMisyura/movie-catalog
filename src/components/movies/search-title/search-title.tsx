@@ -1,3 +1,4 @@
+import { messages } from '@constants';
 import { MoviesDataSchema } from '@schemas';
 import type { MoviesPromiseProps } from '@ts-interfaces';
 import { use } from 'react';
@@ -24,7 +25,7 @@ export const SearchTitle: React.FC<MoviesPromiseProps> = ({
   return (
     <div className={styles.searchLine}>
       <div className={styles.searchTitle}>
-        You searched for:{' '}
+        {messages.searchTitle.searchedFor}{' '}
         <span className={styles.searchTerm}>{searchTerm}</span>{' '}
       </div>
       <span className={styles.searchNumber}>{`${totalResults} results`}</span>

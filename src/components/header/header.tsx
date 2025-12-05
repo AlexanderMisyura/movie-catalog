@@ -36,7 +36,7 @@ export const Header: React.FC<{ user: User }> = ({ user }) => {
   };
 
   return (
-    <header className={`wrapper ${styles.header}`}>
+    <header data-testid="header" className={`wrapper ${styles.header}`}>
       <NavLink to={UrlPath.HOME} className={styles.logo}>
         <img src={logoIcon} alt="mooz logo" />
       </NavLink>
