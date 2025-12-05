@@ -1,21 +1,11 @@
 import { messages } from '@constants';
 import { act, render, screen } from '@testing-library/react';
 import type { MoviesData, MoviesErrorResponse } from '@ts-types';
-import { Suspense } from 'react';
 
 import { createMockMovies } from '@/mocks/utils/create-mock-movies';
+import { WithSuspense } from '@/mocks/with-suspense-wrapper';
 
 import { SearchTitle } from './search-title';
-
-const TestWrapper = ({
-  promise,
-}: {
-  promise: Promise<MoviesData | MoviesErrorResponse>;
-}) => (
-  <Suspense>
-    <SearchTitle moviesPromise={promise} />
-  </Suspense>
-);
 
 describe('SearchTitle', () => {
   it('should not render if movies data not parsed successfully', async () => {
@@ -24,7 +14,12 @@ describe('SearchTitle', () => {
     ) as unknown as Promise<MoviesData | MoviesErrorResponse>;
 
     await act(async () => {
-      render(<TestWrapper promise={errorDataOrUnsupportedPromise} />);
+      render(
+        <WithSuspense
+          Component={SearchTitle}
+          moviesPromise={errorDataOrUnsupportedPromise}
+        />
+      );
     });
 
     expect(
@@ -41,7 +36,9 @@ describe('SearchTitle', () => {
     });
 
     await act(async () => {
-      render(<TestWrapper promise={emptyPromise} />);
+      render(
+        <WithSuspense Component={SearchTitle} moviesPromise={emptyPromise} />
+      );
     });
 
     expect(
@@ -60,7 +57,9 @@ describe('SearchTitle', () => {
     });
 
     await act(async () => {
-      render(<TestWrapper promise={moviesPromise} />);
+      render(
+        <WithSuspense Component={SearchTitle} moviesPromise={moviesPromise} />
+      );
     });
 
     expect(

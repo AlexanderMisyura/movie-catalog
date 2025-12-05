@@ -1,25 +1,15 @@
 import { messages } from '@constants';
 import { act, render, screen } from '@testing-library/react';
 import type { MoviesData, MoviesErrorResponse } from '@ts-types';
-import { Suspense } from 'react';
 
 import { createMockMovies } from '@/mocks/utils/create-mock-movies';
+import { WithSuspense } from '@/mocks/with-suspense-wrapper';
 
 import { MovieGrid } from './movie-grid';
 
 vi.mock('@components', () => ({
   MovieCard: () => <div data-testid="movie-card" />,
 }));
-
-const TestWrapper = ({
-  promise,
-}: {
-  promise: Promise<MoviesData | MoviesErrorResponse>;
-}) => (
-  <Suspense>
-    <MovieGrid moviesPromise={promise} />
-  </Suspense>
-);
 
 describe('MovieGrid', () => {
   it('should display error message from promise if it resolves with error response', async () => {
@@ -31,7 +21,9 @@ describe('MovieGrid', () => {
     });
 
     await act(async () => {
-      render(<TestWrapper promise={errorPromise} />);
+      render(
+        <WithSuspense Component={MovieGrid} moviesPromise={errorPromise} />
+      );
     });
 
     expect(await screen.findByText(errorMessage)).toBeInTheDocument();
@@ -43,7 +35,12 @@ describe('MovieGrid', () => {
     ) as unknown as Promise<MoviesData | MoviesErrorResponse>;
 
     await act(async () => {
-      render(<TestWrapper promise={unsupportedPromise} />);
+      render(
+        <WithSuspense
+          Component={MovieGrid}
+          moviesPromise={unsupportedPromise}
+        />
+      );
     });
 
     expect(await screen.findByTestId('data-parse-error')).toBeInTheDocument();
@@ -58,7 +55,9 @@ describe('MovieGrid', () => {
     });
 
     await act(async () => {
-      render(<TestWrapper promise={emptyPromise} />);
+      render(
+        <WithSuspense Component={MovieGrid} moviesPromise={emptyPromise} />
+      );
     });
 
     expect(
@@ -76,7 +75,9 @@ describe('MovieGrid', () => {
     });
 
     await act(async () => {
-      render(<TestWrapper promise={moviesPromise} />);
+      render(
+        <WithSuspense Component={MovieGrid} moviesPromise={moviesPromise} />
+      );
     });
 
     expect(await screen.findAllByTestId('movie-card')).toHaveLength(
