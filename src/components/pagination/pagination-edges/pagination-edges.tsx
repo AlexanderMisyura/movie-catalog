@@ -26,7 +26,10 @@ export const PaginationEdges: React.FC<PropsWithChildren<PaginationEdges>> = ({
     <>
       <div className={styles.paginationEdge}>
         {previousPage >= 1 ? (
-          <NavLink to={`?s=${searchTerm}&page=${previousPage}`}>
+          <NavLink
+            data-testid="previous-page"
+            to={`?s=${searchTerm}&page=${previousPage}`}
+          >
             <img src={leftIconActive} alt="left" />
           </NavLink>
         ) : (
@@ -36,7 +39,10 @@ export const PaginationEdges: React.FC<PropsWithChildren<PaginationEdges>> = ({
       {children}
       <div className={styles.paginationEdge}>
         {nextPage <= pages.length ? (
-          <NavLink to={`?s=${searchTerm}&page=${nextPage}`}>
+          <NavLink
+            data-testid="next-page"
+            to={`?s=${searchTerm}&page=${nextPage}`}
+          >
             <img src={rightIconActive} alt="right" />
           </NavLink>
         ) : (

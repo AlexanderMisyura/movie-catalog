@@ -27,7 +27,7 @@ export const PaginationBlock: React.FC<MoviesPromiseProps> = ({
   }
 
   return (
-    <div className={styles.paginationBlock}>
+    <div data-testid="pagination-block" className={styles.paginationBlock}>
       <PaginationEdges
         previousPage={currentPage - 1}
         nextPage={currentPage + 1}
