@@ -11,7 +11,7 @@ import styles from './pagination-edges.module.css';
 interface PaginationEdges {
   previousPage: number;
   nextPage: number;
-  pages: (number | '...')[];
+  totalPages: number;
   searchTerm: string;
 }
 
@@ -19,7 +19,7 @@ export const PaginationEdges: React.FC<PropsWithChildren<PaginationEdges>> = ({
   children,
   previousPage,
   nextPage,
-  pages,
+  totalPages,
   searchTerm,
 }) => {
   return (
@@ -38,7 +38,7 @@ export const PaginationEdges: React.FC<PropsWithChildren<PaginationEdges>> = ({
       </div>
       {children}
       <div className={styles.paginationEdge}>
-        {nextPage <= pages.length ? (
+        {nextPage <= totalPages ? (
           <NavLink
             data-testid="next-page"
             to={`?s=${searchTerm}&page=${nextPage}`}
