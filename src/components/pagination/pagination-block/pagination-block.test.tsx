@@ -14,16 +14,17 @@ vi.mock('@components', () => ({
 }));
 
 describe('PaginationBlock', () => {
-  it('should not render if movies data not parsed successfully', async () => {
-    const errorDataOrUnsupportedPromise = Promise.resolve(
-      'error-or-unsupported'
-    ) as unknown as Promise<MoviesData | MoviesErrorResponse>;
+  it('should not render if promise resolves with error response', async () => {
+    const errorPromise: Promise<MoviesErrorResponse> = Promise.resolve({
+      Response: 'False',
+      Error: 'test error',
+    });
 
     await act(async () => {
       render(
         <WithSuspense
           Component={PaginationBlock}
-          moviesPromise={errorDataOrUnsupportedPromise}
+          moviesPromise={errorPromise}
         />
       );
     });
@@ -33,6 +34,7 @@ describe('PaginationBlock', () => {
 
   it('should not render if promise resolves with empty "searchTerm"', async () => {
     const emptyPromise: Promise<MoviesData> = Promise.resolve({
+      Response: 'True',
       movies: createMockMovies(),
       totalResults: 50,
       searchTerm: '',
@@ -53,6 +55,7 @@ describe('PaginationBlock', () => {
 
   it('should not render if there is only one page', async () => {
     const emptyPromise: Promise<MoviesData> = Promise.resolve({
+      Response: 'True',
       movies: createMockMovies(1),
       totalResults: 1,
       searchTerm: 'test',
@@ -73,6 +76,7 @@ describe('PaginationBlock', () => {
 
   it('should display correct results if promise resolves successfully', async () => {
     const moviesPromise: Promise<MoviesData> = Promise.resolve({
+      Response: 'True',
       movies: createMockMovies(),
       totalResults: 100,
       searchTerm: `test`,

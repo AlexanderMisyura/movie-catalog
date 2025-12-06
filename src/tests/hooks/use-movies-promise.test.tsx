@@ -48,7 +48,9 @@ describe('useMoviesPromise', () => {
       expect(router.state.location.search).toBe(searchTwo);
     });
 
-    const secondPromise = promiseSpy.mock.calls[2][0] as Promise<MoviesData>;
+    const secondPromise = promiseSpy.mock.calls[
+      promiseSpy.mock.calls.length - 1
+    ][0] as Promise<MoviesData>;
     expect(secondPromise).not.toBe(firstPromise);
   });
 });

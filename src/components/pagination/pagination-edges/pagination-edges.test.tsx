@@ -15,7 +15,7 @@ describe('PaginationEdges', () => {
             <PaginationEdges
               previousPage={0}
               nextPage={2}
-              pages={[1, 2, 3]}
+              totalPages={3}
               searchTerm="test"
             />
           ),
@@ -40,7 +40,7 @@ describe('PaginationEdges', () => {
             <PaginationEdges
               previousPage={2}
               nextPage={4}
-              pages={[1, 2, 3]}
+              totalPages={3}
               searchTerm="test"
             />
           ),
@@ -65,7 +65,7 @@ describe('PaginationEdges', () => {
             <PaginationEdges
               previousPage={1}
               nextPage={3}
-              pages={[1, 2, 3]}
+              totalPages={3}
               searchTerm="test"
             />
           ),
