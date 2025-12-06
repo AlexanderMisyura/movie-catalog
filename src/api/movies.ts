@@ -13,6 +13,7 @@ export async function getMovies(
 
   if (!searchTerm) {
     return {
+      Response: 'True',
       movies: [],
       totalResults: 0,
       searchTerm: '',
@@ -48,6 +49,7 @@ export async function getMovies(
 
     if (parsedResponse.success) {
       return {
+        Response: parsedResponse.data.Response,
         movies: parsedResponse.data.Search,
         totalResults: Number(parsedResponse.data.totalResults),
         searchTerm,

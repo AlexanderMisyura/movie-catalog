@@ -8,17 +8,15 @@ import { WithSuspense } from '@/mocks/with-suspense-wrapper';
 import { SearchTitle } from './search-title';
 
 describe('SearchTitle', () => {
-  it('should not render if movies data not parsed successfully', async () => {
-    const errorDataOrUnsupportedPromise = Promise.resolve(
-      'error-or-unsupported'
-    ) as unknown as Promise<MoviesData | MoviesErrorResponse>;
+  it('should not render if promise resolves with error response', async () => {
+    const errorPromise: Promise<MoviesErrorResponse> = Promise.resolve({
+      Response: 'False',
+      Error: 'test error',
+    });
 
     await act(async () => {
       render(
-        <WithSuspense
-          Component={SearchTitle}
-          moviesPromise={errorDataOrUnsupportedPromise}
-        />
+        <WithSuspense Component={SearchTitle} moviesPromise={errorPromise} />
       );
     });
 
@@ -29,6 +27,7 @@ describe('SearchTitle', () => {
 
   it('should not render if promise resolves with empty "searchTerm"', async () => {
     const emptyPromise: Promise<MoviesData> = Promise.resolve({
+      Response: 'True',
       movies: [],
       totalResults: 0,
       searchTerm: '',
@@ -50,6 +49,7 @@ describe('SearchTitle', () => {
     const totalResults = 3;
     const searchTerm = 'test';
     const moviesPromise: Promise<MoviesData> = Promise.resolve({
+      Response: 'True',
       movies: createMockMovies(totalResults),
       totalResults,
       searchTerm,

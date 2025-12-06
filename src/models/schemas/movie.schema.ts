@@ -9,6 +9,7 @@ export const MovieSchema = z.object({
 });
 
 export const MoviesDataSchema = z.object({
+  Response: z.literal('True'),
   movies: z.array(MovieSchema),
   totalResults: z.number(),
   searchTerm: z.string(),

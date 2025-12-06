@@ -1,5 +1,4 @@
 import { messages } from '@constants';
-import { MoviesDataSchema } from '@schemas';
 import type { MoviesPromiseProps } from '@ts-interfaces';
 import { use } from 'react';
 
@@ -10,13 +9,11 @@ export const SearchTitle: React.FC<MoviesPromiseProps> = ({
 }) => {
   const resolved = use(moviesPromise);
 
-  const moviesDataParsed = MoviesDataSchema.safeParse(resolved);
-
-  if (!moviesDataParsed.success) {
+  if (resolved.Response === 'False') {
     return null;
   }
 
-  const { searchTerm, totalResults } = moviesDataParsed.data;
+  const { searchTerm, totalResults } = resolved;
 
   if (!searchTerm) {
     return null;

@@ -1,5 +1,4 @@
 import { PaginationEdges, PaginationItem } from '@components';
-import { MoviesDataSchema } from '@schemas';
 import type { MoviesPromiseProps } from '@ts-interfaces';
 import { use } from 'react';
 
@@ -13,13 +12,11 @@ export const PaginationBlock: React.FC<MoviesPromiseProps> = ({
 }) => {
   const resolved = use(moviesPromise);
 
-  const moviesDataParsed = MoviesDataSchema.safeParse(resolved);
-
-  if (!moviesDataParsed.success) {
+  if (resolved.Response === 'False') {
     return null;
   }
 
-  const { currentPage, totalResults, searchTerm } = moviesDataParsed.data;
+  const { currentPage, totalResults, searchTerm } = resolved;
 
   const pages = createPages(currentPage, totalResults);
 

@@ -6,7 +6,7 @@ import {
   createMockMovies,
   TEST_RESULTS_COUNT,
 } from '@/mocks/utils/create-mock-movies';
-import type { MoviesResponse } from '@/models/types';
+import type { MoviesErrorResponse, MoviesResponse } from '@/models/types';
 
 const TEST_ERROR_MESSAGE = 'Test error';
 const SEARCH_TERM = 'test';
@@ -18,6 +18,7 @@ describe('getMovies', () => {
     const response = await getMovies(new URLSearchParams());
 
     expect(response).toEqual({
+      Response: 'True',
       movies: [],
       totalResults: 0,
       searchTerm: '',
@@ -54,6 +55,7 @@ describe('getMovies', () => {
     const response = await getMovies(searchParams);
 
     expect(response).toEqual({
+      Response: 'True',
       movies: createMockMovies(),
       totalResults: TEST_RESULTS_COUNT,
       searchTerm: SEARCH_TERM,
@@ -62,7 +64,10 @@ describe('getMovies', () => {
   });
 
   it('should return error response', async () => {
-    const errorResponseData = { Response: 'False', Error: TEST_ERROR_MESSAGE };
+    const errorResponseData: MoviesErrorResponse = {
+      Response: 'False',
+      Error: TEST_ERROR_MESSAGE,
+    };
     server.use(getMoviesHandler(errorResponseData));
     const response = await getMovies(searchParams);
 

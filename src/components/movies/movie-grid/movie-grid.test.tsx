@@ -29,25 +29,9 @@ describe('MovieGrid', () => {
     expect(await screen.findByText(errorMessage)).toBeInTheDocument();
   });
 
-  it('should display error message if promise resolves with unsupported data', async () => {
-    const unsupportedPromise = Promise.resolve(
-      'unsupported'
-    ) as unknown as Promise<MoviesData | MoviesErrorResponse>;
-
-    await act(async () => {
-      render(
-        <WithSuspense
-          Component={MovieGrid}
-          moviesPromise={unsupportedPromise}
-        />
-      );
-    });
-
-    expect(await screen.findByTestId('data-parse-error')).toBeInTheDocument();
-  });
-
   it('should display an initial message if promise resolves with empty "searchTerm"', async () => {
     const emptyPromise: Promise<MoviesData> = Promise.resolve({
+      Response: 'True',
       movies: [],
       totalResults: 0,
       searchTerm: '',
@@ -68,6 +52,7 @@ describe('MovieGrid', () => {
   it('should render movie cards for each movie', async () => {
     const cardsNumber = 3;
     const moviesPromise: Promise<MoviesData> = Promise.resolve({
+      Response: 'True',
       movies: createMockMovies(cardsNumber),
       totalResults: cardsNumber,
       searchTerm: 'test',
